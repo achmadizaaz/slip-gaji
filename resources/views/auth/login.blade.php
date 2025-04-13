@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col-lg-4 mx-auto">
                         <div class="card shadow">
-                            <div class="card-body p-0 bg-black auth-header-box rounded-top">
+                            <div class="card-body p-0auth-header-box rounded-top border-bottom">
                                 <div class="text-center p-3">
                                     <h4 class="mt-3 mb-1 fw-semibold text-white fs-18">{{ env('APP_NAME') }}</h4>   
                                     <p class="text-muted fw-medium mb-0">Sign in to continue.</p>  
@@ -58,12 +58,12 @@
                                     <div class="form-group mb-0 row">
                                         <div class="col-12">
                                             <div class="d-grid mt-3">
-                                                <button class="btn btn-primary" type="submit">Log In <i class="fas fa-sign-in-alt ms-1"></i></button>
+                                                <button class="btn btn-primary" type="submit">Log In </button>
                                             </div>
                                             <div class="d-grid mt-2">
-                                                <button class="btn bg-danger-subtle text-danger" type="submit">
+                                                <a class="btn bg-danger-subtle text-danger" href="{{ route('oauth.google.redirect') }}">
                                                     <i class="fab fa-google align-self-center"></i> Google Account
-                                                </button>
+                                                </a>
                                             </div>
                                         </div><!--end col--> 
                                     </div> <!--end form-group-->                           
