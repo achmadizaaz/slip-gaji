@@ -1,36 +1,39 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en" dir="ltr" data-startbar="light" data-bs-theme="dark">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8" />
+        <title>@yield('title', env('APP_NAME'))</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
-
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="assets/images/favicon.ico">
         <!-- Scripts -->
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+        <!-- App css -->
+        <link href="{{ asset('themes/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('themes/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('themes/css/app.min.css') }}" rel="stylesheet" type="text/css" />
+
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
 
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endisset
+    
+    <!-- Top Bar Start -->
+    <body>
+        @include('layouts.topbar')
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
-        </div>
+        @include('layouts.leftbar')
+
+        @yield('content')
+
+        <!-- Javascript  -->  
+        <!-- vendor js -->
+        
+        <script src="{{ asset('themes/vendor/simplebar/simplebar.min.js') }}"></script>
+        <script src="{{ asset('themes/js/app.js') }}"></script>
+
+        @stack('scripts')
     </body>
+    <!--end body-->
 </html>
