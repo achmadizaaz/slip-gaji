@@ -41,7 +41,7 @@
                         <div class="collapse " id="sidebarAnalytics">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
-                                    <a href="analytics-customers.html" class="nav-link ">List Pengguna</a>
+                                    <a href="{{ route('user.index') }}" class="nav-link ">List Pengguna</a>
                                 </li><!--end nav-item-->
                                 <li class="nav-item">
                                     <a href="analytics-reports.html" class="nav-link ">Roles</a>

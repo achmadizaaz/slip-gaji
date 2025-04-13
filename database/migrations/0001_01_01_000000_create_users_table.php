@@ -14,16 +14,13 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->string('username')->unique();
+            $table->string('slug')->unique();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->boolean('is_active')->default(0);
-            $table->string('slug')->unique();
-            $table->string('otp_code')->nullable();
-            $table->timestamp('otp_expires_at')->nullable();
-            $table->integer('otp_attempt_count')->nullable();
-            $table->timestamp('otp_locked_at')->nullable();
+            $table->boolean('status')->default(0);
+            $table->string('image')->nullable();
             $table->datetime('last_login_at')->nullable();
             $table->string('last_login_ip')->nullable();
             $table->rememberToken();
