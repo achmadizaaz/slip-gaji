@@ -33,8 +33,6 @@ class UserController extends Controller
 
     public function store(UserRequest $request)
     {
-        
-        // Jika terdapat file image
         if (isset($request->image)) {
             $image = $this->fileService->uploadFile($request->image, 'users', 'public');
         }
@@ -42,6 +40,7 @@ class UserController extends Controller
         $user = $this->model->create([
             'name' => $request->name,
             'email' => $request->email,
+            'username' =>$request->username,
             'password' => Hash::make($request->password),
             'status' => $request->status,
             'image' => $image ?? null,
@@ -52,6 +51,13 @@ class UserController extends Controller
         $user->assignRole($role);
 
         return to_route('user.index')->with('success', 'Pengguna telah berhasil ditambahkan!');
+    }
+
+    public function show($slug)
+    {
+        return view('user.show', [
+            'user' => $this->model->where('slug', $slug)->firstOrFail(),
+        ]);
     }
 
     public function edit(Request $request)
