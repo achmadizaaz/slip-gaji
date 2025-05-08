@@ -11,12 +11,12 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('guest')->group(function () {
+Route::middleware('guest')->prefix('auth')->group(function () {
 
-    Route::get('auth/login', [AuthenticatedSessionController::class, 'create'])
+    Route::get('login', [AuthenticatedSessionController::class, 'create'])
         ->name('login');
 
-    Route::post('auth/login', [AuthenticatedSessionController::class, 'store']);
+    Route::post('login', [AuthenticatedSessionController::class, 'store']);
 
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
         ->name('password.request');
@@ -31,7 +31,7 @@ Route::middleware('guest')->group(function () {
         ->name('password.store');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')->prefix('auth')->group(function () {
     Route::get('verify-email', EmailVerificationPromptController::class)
         ->name('verification.notice');
 
@@ -55,12 +55,12 @@ Route::middleware('auth')->group(function () {
 });
 
 // OAuth Google
-Route::middleware('guest')->group(function () {
-    // Untuk redirect ke Google
-    Route::get('OAuth/google/redirect', [OAuthGoogleController::class, 'redirect'])
+Route::middleware('guest')->prefix('OAuth')->group(function () {
+    // Redirect to Google Account
+    Route::get('google/redirect', [OAuthGoogleController::class, 'redirect'])
         ->name('oauth.google.redirect');
 
-     // Untuk callback dari Google
-    Route::get('OAuth/google/callback', [OAuthGoogleController::class, 'callback'])
+     // Callback from Google Account
+    Route::get('google/callback', [OAuthGoogleController::class, 'callback'])
         ->name('oauth.google.callback');
 });

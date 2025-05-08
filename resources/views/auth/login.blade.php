@@ -1,4 +1,4 @@
-@extends('layouts.guest')
+@extends('layouts.auth')
 
 @section('title', 'Login')
 
@@ -11,11 +11,11 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-4 mx-auto">
-                        <div class="card shadow">
-                            <div class="card-body p-0auth-header-box rounded-top border-bottom">
-                                <div class="text-center p-3">
-                                    <h4 class="mt-3 mb-1 fw-semibold text-white fs-18">{{ env('APP_NAME') }}</h4>   
-                                    <p class="text-muted fw-medium mb-0">Sign in to continue.</p>  
+                        <div class="card border shadow">
+                            <div class="card-body p-0 auth-header-box rounded-top border-bottom">
+                                <div class="text-center">
+                                    <h4 class="mt-3 mb-1 fw-semibold fs-18">{{ env('APP_NAME') }}</h4>   
+                                    <p class="text-muted fw-medium mb-2">Sign in to continue.</p>  
                                 </div>
                             </div>
                             <div class="card-body pt-0">     
@@ -29,7 +29,7 @@
                                     @endif                            
                                     <div class="form-group mb-2">
                                         <label class="form-label" for="username">Username</label>
-                                        <input type="text" class="form-control" id="username" name="login" placeholder="Enter username" value="{{ old('login') }}" required>          
+                                        <input type="text" class="form-control" id="username" name="login" placeholder="Enter username or email" value="{{ old('login') }}" required>          
                                                              
                                     </div><!--end form-group--> 
         

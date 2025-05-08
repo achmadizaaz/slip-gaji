@@ -20,14 +20,14 @@ class OAuthGoogleController extends Controller
         try {
            // Google user object
             $OAuth = Socialite::driver('google')->stateless()->user();
-            // Cari user di database berdasarkan email google
+            // Find user on database by email address
             $user = User::where('email', $OAuth->getEmail())->first();
-            // Jika ada user, lakukan generate login
+            // If user available, generate login
             Auth::login($user);
             session()->regenerate();
         } catch (\Exception $e) {
             Log::error('Login OAuth Google: '.$e->getMessage());
-            return to_route('login')->with('failed', 'Try after some time, ');
+            return to_route('login')->with('failed', 'Try after some time or account not found!');
         }
 
         return to_route('dashboard');

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" data-startbar="light" data-bs-theme="dark">
+<html lang="en" dir="ltr" data-startbar="light" data-bs-theme="auto">
     <head>
         <meta charset="utf-8" />
         <title>@yield('title', env('APP_NAME'))</title>
@@ -15,6 +15,10 @@
         <link href="{{ asset('themes/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('themes/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('themes/css/app.min.css') }}" rel="stylesheet" type="text/css" />
+
+        <!-- Scripts Dark Mode Bootstrap -->
+        <script src="{{ asset('js/dark-mode.js') }}"></script>
+
 
     </head>
 

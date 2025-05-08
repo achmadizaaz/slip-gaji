@@ -1,4 +1,4 @@
-@extends('layouts.guest')
+@extends('layouts.auth')
 
 @section('title', 'Forget password')
 
@@ -9,10 +9,10 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-4 mx-auto">
-                        <div class="card shadow">
+                        <div class="card border shadow">
                             <div class="card-body p-0 border-bottom auth-header-box rounded-top">
                                 <div class="text-center p-3">
-                                    <h4 class="mt-3 mb-1 fw-semibold text-white fs-18">Reset Password</h4>   
+                                    <h4 class="mb-2 fw-semibold fs-18">Reset Password</h4>   
                                     <p class="text-muted fw-medium mb-0">Enter your Email and instructions will be sent to you!</p>  
                                 </div>
                             </div>
@@ -32,8 +32,14 @@
                                                 </button>
                                             </div>
                                         </div><!--end col--> 
-                                    </div> <!--end form-group-->                           
+                                    </div> <!--end form-group--> 
+                                                              
                                 </form><!--end form-->
+                                <div class="mt-2 text-end">
+                                    Back to <a href="{{ route('login') }}">
+                                        login page
+                                    </a>
+                                </div>
                             </div><!--end card-body-->
                         </div><!--end card-->
                     </div><!--end col-->
