@@ -36,22 +36,39 @@
                                     <label for="name" class="form-label">
                                         Name <small class="text-danger">*</small>
                                     </label>
-                                    <input type="text" name="name" class="form-control" autofocus required value="{{ old('name') }}">
+                                    <input type="text" name="name" class="form-control @error('name')
+                                            is-invalid
+                                        @enderror" autofocus required value="{{ old('name') }}">
+
+                                    @error('name')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
 
                                 <div class="mb-3 ">
                                         <label for="username" class="form-label">
                                             Username <small class="text-danger">*</small>
                                         </label>
-                                        <input type="text" name="username" class="form-control " required value="{{ old('username') }}">
-                                       
+                                        <input type="text" name="username" class="form-control @error('username')
+                                            is-invalid
+                                        @enderror" required value="{{ old('username') }}">
+                                        
+                                        @error('username')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                 </div>
             
                                 <div class="mb-3">
                                         <label for="email" class="form-label">
                                             Email <small class="text-danger">*</small>
                                         </label>
-                                        <input type="email" name="email" class="form-control" required value="{{ old('email') }}">
+                                        <input type="email" name="email" class="form-control @error('email')
+                                            is-invalid
+                                        @enderror" required value="{{ old('email') }}">
+
+                                        @error('email')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                 </div>
                             </div>
                             <div class="col-12 col-md-4">
@@ -59,18 +76,27 @@
                                     <label for="password" class="form-label">
                                         Password <small class="text-danger">*</small>
                                     </label>
-                                    <input type="text" name="password" class="form-control" required>
-                                    <small class="fst-italic text-secondary">Password must be at least 8 characters</small>
+                                    <input type="text" name="password" class="form-control @error('password')
+                                        is-invalid                                        
+                                    @enderror" required>
+
+                                    @error('password')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                </div>
                                <div class="mb-2">
-                                <label for="status" class="form-label">
-                                    Status <small class="text-danger">*</small>
-                                </label>
-                                <select name="is_active" id="status" class="form-select" required>
-                                    <option value="">Choose a status</option>
-                                    <option value="inactive" @selected(old('is_active') == 'inactive')>Inactive</option>
-                                    <option value="active" @selected(old('is_active') == 'active')>Active</option>
-                                </select>
+                                    <label for="status" class="form-label">
+                                        Status <small class="text-danger">*</small>
+                                    </label>
+                                    <select name="is_active" id="status" class="form-select @error('is_active') is-invalid @enderror" required>
+                                        <option value="">Choose a status</option>
+                                        <option value="inactive" @selected(old('is_active') == 'inactive')>Inactive</option>
+                                        <option value="active" @selected(old('is_active') == 'active')>Active</option>
+                                    </select>
+
+                                    @error('is_active')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                </div>
                             </div>
                         </div>
