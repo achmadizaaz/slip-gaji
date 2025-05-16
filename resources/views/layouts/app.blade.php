@@ -15,7 +15,7 @@
         <link href="{{ asset('themes/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('themes/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('themes/css/app.min.css') }}" rel="stylesheet" type="text/css" />
-
+        <script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
     </head>
 
     

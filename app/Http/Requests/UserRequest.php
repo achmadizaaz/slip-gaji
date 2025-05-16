@@ -22,13 +22,20 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'username' => ['required', 'string', 'unique:users,username,id', 'max:255'],
+            'image' => ['nullable', 'image', 'mimes:png,jpg,jpeg', 'max:2048'],
             'name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'unique:users,username,id', 'min:4','max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,except,id'],
             'password' => ['required', 'string', 'min:8', 'max:255'],
-            'status' => ['required', 'in:active,inactive'],
-            'image' => ['nullable', 'image', 'mimes:png,jpg,jpeg', 'max:2048'],
+            'is_active' => ['required', 'in:active,inactive'],
             'role' => ['nullable', 'exists:roles,id'],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'is_active.in' => 'The status must contain "active" or "inactive"'
         ];
     }
 }

@@ -4,10 +4,11 @@
 
 @section('content')
 <div class="page-wrapper">
-
     <!-- Page Content-->
     <div class="page-content">
         <div class="container-fluid"> 
+            <x-alert-error/>
+            <x-alert-status/>   
             <div class="row">
                 <div class="col-sm-12">
                     <div class="page-title-box d-md-flex justify-content-md-between align-items-center">
@@ -21,47 +22,54 @@
                     @csrf
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-2">
-                                <img src="{{ asset('themes/images/no-avatar.webp') }}" width="100%" height="200px" class="rounded-2" id="preview-image">
-                                <div class="mt-2 text-center">
-                                    <input type="file" name="'image" id="image" style="display:none">
-                                    <label for="image" class="btn btn-sm text-bg-info w-100">Upload a image</label>
+                            <div class="col-12 col-md-2">
+                                <div class="mb-3">
+                                    <img src="{{ asset('themes/images/no-avatar.webp') }}" width="100%" height="200px" class="rounded-2" id="preview-image">
+                                    <div class="mt-2 text-center">
+                                        <input type="file" name="image" id="uploadImage" style="display:none" accept=".jpg,.png,.jpeg">
+                                        <label for="uploadImage" class="btn btn-sm text-bg-info w-100">Upload a image</label>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-4">
-                               <div class="mb-3">
-                                    <label for="username" class="form-label">
-                                        Username <small class="text-danger">*</small>
-                                    </label>
-                                    <input type="text" name="username" class="form-control" autofocus required>
-                               </div>
-                               <div class="mb-3">
-                                    <label for="email" class="form-label">
-                                        Email <small class="text-danger">*</small>
-                                    </label>
-                                    <input type="email" name="email" class="form-control" required>
-                               </div>
-                               <div class="mb-2">
+                            <div class="col-12 col-md-4">
+                                <div class="mb-2">
                                     <label for="name" class="form-label">
                                         Name <small class="text-danger">*</small>
                                     </label>
-                                    <input type="text" name="name" class="form-control" required>
-                               </div>
+                                    <input type="text" name="name" class="form-control" autofocus required value="{{ old('name') }}">
+                                </div>
+
+                                <div class="mb-3 ">
+                                        <label for="username" class="form-label">
+                                            Username <small class="text-danger">*</small>
+                                        </label>
+                                        <input type="text" name="username" class="form-control " required value="{{ old('username') }}">
+                                       
+                                </div>
+            
+                                <div class="mb-3">
+                                        <label for="email" class="form-label">
+                                            Email <small class="text-danger">*</small>
+                                        </label>
+                                        <input type="email" name="email" class="form-control" required value="{{ old('email') }}">
+                                </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-12 col-md-4">
                                <div class="mb-3">
                                     <label for="password" class="form-label">
                                         Password <small class="text-danger">*</small>
                                     </label>
-                                    <input type="text" name="password" class="form-control" autofocus required>
+                                    <input type="text" name="password" class="form-control" required>
+                                    <small class="fst-italic text-secondary">Password must be at least 8 characters</small>
                                </div>
                                <div class="mb-2">
                                 <label for="status" class="form-label">
                                     Status <small class="text-danger">*</small>
                                 </label>
-                                <select name="status" id="status" class="form-select" required>
-                                    <option value="inacative">Inactive</option>
-                                    <option value="active">Active</option>
+                                <select name="is_active" id="status" class="form-select" required>
+                                    <option value="">Choose a status</option>
+                                    <option value="inactive" @selected(old('is_active') == 'inactive')>Inactive</option>
+                                    <option value="active" @selected(old('is_active') == 'active')>Active</option>
                                 </select>
                                </div>
                             </div>
@@ -81,4 +89,18 @@
     <!-- end page content -->
 </div>
 <!-- end page-wrapper -->
+
 @endsection
+
+@push('scripts')
+    <script>
+        // PREVIEW IMAGE
+        $('#uploadImage').change(function(){
+            let reader = new FileReader();
+            reader.onload = (e) => {
+                $('#preview-image').attr('src', e.target.result); 
+            }
+            reader.readAsDataURL(this.files[0]); 
+        });
+    </script>
+@endpush

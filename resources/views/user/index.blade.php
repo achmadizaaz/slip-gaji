@@ -52,10 +52,10 @@
                                                 <td>{{ $user->username }}</td>
                                                 <td>{{ $user->email }} </td>
                                                 <td>
-                                                    @if ($user->status)
+                                                    @if ($user->is_active)
                                                         <span class="badge bg-success-subtle text-success">Active</span>
                                                         @else
-                                                        <span class="badge bg-secondary-subtle text-secondary">Inactive</span>
+                                                        <span class="badge bg-danger-subtle text-danger">Inactive</span>
                                                     @endif
                                                 </td>
                                                 <td>{!! $user->last_login_at ?? '<i>Belum pernah login</i>' !!}</td>

@@ -37,12 +37,15 @@ class UserController extends Controller
             $image = $this->fileService->uploadFile($request->image, 'users', 'public');
         }
 
+        // Change is_active value (active/inactive) to bolean
+        $is_active = $request->is_active == 'active' ? 1 : 0;
+
         $user = $this->model->create([
             'name' => $request->name,
             'email' => $request->email,
             'username' =>$request->username,
             'password' => Hash::make($request->password),
-            'status' => $request->status,
+            'is_active' => $is_active,
             'image' => $image ?? null,
         ]);
 
