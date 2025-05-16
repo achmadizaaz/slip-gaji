@@ -37,6 +37,7 @@ class UserController extends Controller
             $image = $this->fileService->uploadFile($request->image, 'users', 'public');
         }
 
+
         // Change is_active value (active/inactive) to bolean
         $is_active = $request->is_active == 'active' ? 1 : 0;
 

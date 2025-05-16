@@ -18,7 +18,7 @@
             </div><!--end row-->
 
             <div class="card shadow">
-                <form action="{{ route('user.store') }}" method="POST">
+                <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         <div class="row">

@@ -44,7 +44,11 @@
                                                     {{ $loop->iteration }}
                                                 </td>
                                                 <td class="ps-0">
-                                                    <img src="{{  asset('themes/images/no-avatar.webp') }}" alt="" class="thumb-md d-inline rounded-circle me-1">
+                                                    @if ($user->image)
+                                                        <img src="{{  asset('storage/'.$user->image) }}" alt="{{ $user->name }}" class="thumb-md d-inline rounded-circle me-1">
+                                                    @else
+                                                        <img src="{{  asset('themes/images/no-avatar.webp') }}"  alt="{{ $user->name }}" class="thumb-md d-inline rounded-circle me-1">
+                                                    @endif
                                                     <p class="d-inline-block align-middle mb-0">
                                                         <span class="font-13 fw-medium">{{ $user->name }}</span> 
                                                     </p>
