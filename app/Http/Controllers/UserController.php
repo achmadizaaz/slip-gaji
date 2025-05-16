@@ -22,7 +22,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         return view('user.index', [
-            'users' => $this->model->all(),
+            'users' => $this->model->paginate(2),
         ]);
     }
 
@@ -78,11 +78,16 @@ class UserController extends Controller
         $user->fill($request->validated()); 
     }
 
-    public function delete(Request $request, int $id)
+    public function delete(Request $request, $id)
     {
 
         // Cari user berdasarkan id
         $user = $this->model->findOrFail($id);
+
+        // Cegah hapus diri sendiri
+        if (auth()->user()->id === $user->id) {
+            return redirect()->back()->with('failed', 'Kamu tidak bisa menghapus akunmu sendiri.');
+        }
 
         // Validation konfirmasi penghapusan
         if($request->confirm != $user->username){
@@ -92,7 +97,7 @@ class UserController extends Controller
         // Jika user terdapat image
         // Hapus file image
         if(isset($user->image)){
-            $this->fileService->deleteFile($user->image);
+            $this->fileService->deleteFile($user->image, 'public');
         };
 
         $user->delete();

@@ -8,6 +8,7 @@
         <!-- Page Content-->
         <div class="page-content">
             <div class="container-fluid"> 
+                
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="page-title-box d-md-flex justify-content-md-between align-items-center">
@@ -18,10 +19,31 @@
                         </div><!--end page-title-box-->
                     </div><!--end col-->
                 </div><!--end row-->
+                <x-alert-error/>
+                <x-alert-status/>   
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
+                                <div class="d-flex gap-2 mb-2">
+                                    {{-- <div>
+                                        Total  {{ $users->total() }} <i>users</i>
+                                    </div> --}}
+                                    <table>
+                                        <tr>
+                                            <td class="me-2">Show data</td>
+                                            <td>
+                                                <select name="per_page" class="form-select" id="per_page" style="width: 100px">
+                                                    <option value="10">10</option>
+                                                    <option value="20">20</option>
+                                                    <option value="50">50</option>
+                                                    <option value="100">100</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead class="table-light">
@@ -41,7 +63,7 @@
                                             @foreach ($users as $user)
                                             <tr>
                                                 <td style="width: 16px;">
-                                                    {{ $loop->iteration }}
+                                                    {{ ($users->currentPage() - 1) * $users->perPage() + $loop->iteration }}
                                                 </td>
                                                 <td class="ps-0">
                                                     @if ($user->image)
@@ -64,17 +86,19 @@
                                                 </td>
                                                 <td>{!! $user->last_login_at ?? '<i>Belum pernah login</i>' !!}</td>
                                                 <td class="text-end">    
-                                                    <a href="{{ route('user.show', $user->slug) }}" class="btn btn-sm btn-info" data-bs-toggle="tooltip" title="Detail">
+                                                    <a href="{{ route('user.show', $user->slug) }}" class="btn btn-sm btn-info" title="Detail">
                                                         <i class="bi bi-info-circle"></i>
                                                     </a>                                                   
-                                                    <a href="{{ route('user.edit', $user->slug) }}" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" title="Edit">
+                                                    <a href="{{ route('user.edit', $user->slug) }}" class="btn btn-sm btn-warning" title="Edit">
                                                         <i class="bi bi-pencil-square"></i>
                                                     </a>
-                                                    <a href="#" class="btn btn-sm btn-success reset-password"  data-id="{{ $user->id }}" data-username="{{ $user->username }}" data-bs-toggle="tooltip" title="Reset password">
+                                                    <a href="#" class="btn btn-sm btn-success reset-password"  data-id="{{ $user->id }}" data-username="{{ $user->username }}" title="Reset password">
                                                         <i class="bi bi-arrow-clockwise"></i>
                                                     </a>
-                                                    <a href="#" class="btn btn-sm btn-danger delete-user" data-id="{{ $user->id }}" data-username="{{ $user->username }}" data-bs-toggle="tooltip" title="Remove">
-                                                        <i class="bi bi-trash3"></i>
+                                                    <button type="button" class="btn btn-sm btn-danger confirm_delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-name="{{ $user->name }}" data-id="{{ $user->id }}" data-username="{{ $user->username }}" title="Delete">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+
                                                     </a>
                                                 </td>
                                             </tr> 
@@ -82,6 +106,9 @@
                                                                                                                             
                                         </tbody>
                                     </table>
+                                    <div class="d-flex align-items-center flex-row-reverse">
+                                        {{ $users->onEachSide(0)->appends(request()->input())->links('layouts.pagination') }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -94,4 +121,46 @@
         <!-- end page content -->
     </div>
     <!-- end page-wrapper -->
+
+    <!-- Modal Delete -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h1 class="modal-title fs-5" id="deleteModalLabel">Delete</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                <form action="#" id="formDelete" method="POST">
+                    <div class="modal-body">
+                        @csrf
+                        @method('DELETE')
+                        <label for="confirm_delete" class="form-label">Anda yakin ingin menghapus pengguna  <span id="deleteName" class="fw-bold text-danger"></span>? </label>
+                        <input type="text" class="form-control" name="confirm" id="confirm_delete" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
+
+@push('scripts')
+    <script>
+         $('.confirm_delete').click(function(e) {
+            let name = $(this).data('name');
+            let username = $(this).data('username');
+            let id = $(this).data('id');
+            let url = "{{ route('user.delete', ':id') }}";
+            route = url.replace(':id', id);
+            $('#deleteName').text(name);
+            $('#confirm_delete').attr('placeholder', 'Ketikan: '+ username)
+            $('#formDelete').attr('action', route);
+        });
+
+
+    </script>
+@endpush
