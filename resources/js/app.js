@@ -11,3 +11,5 @@ import "bootstrap";
 
 // Added: Popper.js dependency for popover support in Bootstrap
 import "@popperjs/core";
+
+require("bootstrap/dist/js/bootstrap.bundle.min.js");

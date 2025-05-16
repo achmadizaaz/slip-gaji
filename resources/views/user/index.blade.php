@@ -60,16 +60,16 @@
                                                 </td>
                                                 <td>{!! $user->last_login_at ?? '<i>Belum pernah login</i>' !!}</td>
                                                 <td class="text-end">    
-                                                    <a href="{{ route('user.show', $user->slug) }}" class="btn btn-sm btn-info" title="Detail">
+                                                    <a href="{{ route('user.show', $user->slug) }}" class="btn btn-sm btn-info" data-bs-toggle="tooltip" title="Detail">
                                                         <i class="bi bi-info-circle"></i>
                                                     </a>                                                   
-                                                    <a href="{{ route('user.edit', $user->slug) }}" class="btn btn-sm btn-warning" title="Edit">
+                                                    <a href="{{ route('user.edit', $user->slug) }}" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" title="Edit">
                                                         <i class="bi bi-pencil-square"></i>
                                                     </a>
-                                                    <a href="#" class="btn btn-sm btn-success reset-password"  data-id="{{ $user->id }}" data-username="{{ $user->username }}" title="Reset password">
+                                                    <a href="#" class="btn btn-sm btn-success reset-password"  data-id="{{ $user->id }}" data-username="{{ $user->username }}" data-bs-toggle="tooltip" title="Reset password">
                                                         <i class="bi bi-arrow-clockwise"></i>
                                                     </a>
-                                                    <a href="#" class="btn btn-sm btn-danger delete-user" data-id="{{ $user->id }}" data-username="{{ $user->username }}" title="Remove">
+                                                    <a href="#" class="btn btn-sm btn-danger delete-user" data-id="{{ $user->id }}" data-username="{{ $user->username }}" data-bs-toggle="tooltip" title="Remove">
                                                         <i class="bi bi-trash3"></i>
                                                     </a>
                                                 </td>
