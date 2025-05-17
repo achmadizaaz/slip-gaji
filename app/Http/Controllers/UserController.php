@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\Users\TemplateImportUser;
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\Users\ImportUserRequest;
+use App\Imports\Users\UserImport;
 use App\Models\Role;
 use App\Models\User;
 use App\Services\FileService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -22,7 +28,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         return view('user.index', [
-            'users' => $this->model->paginate(2),
+            'users' => $this->model->paginate(10),
         ]);
     }
 
@@ -54,7 +60,7 @@ class UserController extends Controller
 
         $user->assignRole($role);
 
-        return to_route('user.index')->with('success', 'Pengguna telah berhasil ditambahkan!');
+        return to_route('user.index')->with('success', 'Pengguna telah berhasil ditambahkan.');
     }
 
     public function show($slug)
@@ -103,5 +109,24 @@ class UserController extends Controller
         $user->delete();
 
         return to_route('user.index')->with('success', 'Pengguna telah berhasil dihapus');
+    }
+
+    public function downloadTemplateImport()
+    {
+        $time = now();
+        return Excel::download(new TemplateImportUser, 'Template import user '.$time.'.xlsx');
+    }
+
+    public function importUsers(ImportUserRequest $request)
+    {
+        try{
+            Excel::import(new UserImport, $request->file);
+        }catch(ValidationException $exception){
+            return to_route('user.index')->with('import-failed', $exception->failures());
+        }catch (\Exception $exception) {
+                Log::error('Import user gagal : ' . $exception->getMessage());
+                return redirect()->back()->with('failed', 'Terjadi kesalahan, silakan hubungi administrator');
+            }
+        return back()->with('success', 'Import data user telah berhasil.');
     }
 }

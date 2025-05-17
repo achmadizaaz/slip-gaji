@@ -13,14 +13,38 @@
                     <div class="col-sm-12">
                         <div class="page-title-box d-md-flex justify-content-md-between align-items-center">
                             <h4 class="page-title">List Users</h4>
-                            <div>
-                                <a href="{{ route('user.create') }}" class="btn btn-primary" ><i class="fa-solid fa-plus me-1"></i> Add User</a>
+                            <div class="d-flex gap-1">
+                                <!-- Import Button trigger modal -->
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#importModal">
+                                    <i class="bi bi-cloud-arrow-up me-1"></i> Import
+                                </button>
+
+                                <a href="{{ route('user.create') }}" class="btn btn-primary" >
+                                    <i class="fa-solid fa-plus me-1"></i> Add User
+                                </a>
                             </div><!--end col-->                             
                         </div><!--end page-title-box-->
                     </div><!--end col-->
                 </div><!--end row-->
+                
                 <x-alert-error/>
-                <x-alert-status/>   
+                <x-alert-status/>  
+
+                @if (session('import-failed'))
+                    {{-- Error Validation Import Files --}}
+                    <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                        <button type="button" class="btn-sm btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <strong>Error Imports:</strong>
+                        <ul>
+                            @foreach (session('import-failed') as $failure)
+                                @foreach ($failure->errors() as $error)
+                                    <li>Row {{ $failure->row(). ', ' . $error }}</li>
+                                @endforeach
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
@@ -121,6 +145,47 @@
         <!-- end page content -->
     </div>
     <!-- end page-wrapper -->
+
+    <!-- Modal Import User -->
+    <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="importModalLabel">Import Users</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="{{ route('user.import') }}" method="POST" enctype="multipart/form-data">
+        <div class="modal-body">
+                @method('PUT')
+                @csrf
+                <div class="mb-3">
+                    Silakan unduh template impor pengguna melalui link berikut untuk memastikan format data sesuai. <a href="{{ route('user.download.template.import') }}">
+                        <span class="badge bg-success-subtle text-success">Download Template</span>
+                    </a>
+                </div>
+                <div class="mb-3">
+                    <input type="file" class="form-control" name="file" accept=".csv">
+                </div>
+                <div>
+                    Silakan unggah file dengan ketentuan sebagai berikut:
+                    <ul>
+                        <li>Format File: CSV (.csv)</li>
+                        <li>Struktur Format: File harus mengikuti struktur yang telah disediakan. Pastikan setiap kolom dan urutan kolom sesuai dengan template yang diberikan.</li>
+                        <li>Ekstensi File: Harus berekstensi .csv. File dengan ekstensi lain tidak akan diterima.</li>
+                        <li>Konsistensi Data: Pastikan data dalam file tidak mengandung karakter khusus yang tidak diperlukan dan sesuai dengan format data masing-masing kolom (misalnya: tanggal, angka, teks, dll).</li>
+                    </ul>
+                    Jika file tidak sesuai dengan format yang telah ditentukan, proses unggah atau pemrosesan data dapat gagal.
+                </div>
+            
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-success">Import data</button>
+        </div>
+        </form>
+        </div>
+    </div>
+    </div>
 
     <!-- Modal Delete -->
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">

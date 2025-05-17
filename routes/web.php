@@ -30,6 +30,8 @@ Route::middleware('auth')->prefix('dashboard')->group(function () {
         Route::get('/{id}/edit', 'edit')->name('user.edit');
         Route::patch('/{id}', 'update')->name('user.update');
         Route::delete('/{id}', 'delete')->name('user.delete');
+        Route::get('/download/template-import', 'downloadTemplateImport')->name('user.download.template.import');
+        Route::put('/import', 'importUsers')->name('user.import');
     });
 
 
