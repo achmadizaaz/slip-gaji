@@ -116,9 +116,11 @@
                                                     <a href="{{ route('user.edit', $user->slug) }}" class="btn btn-sm btn-warning" title="Edit">
                                                         <i class="bi bi-pencil-square"></i>
                                                     </a>
-                                                    <a href="#" class="btn btn-sm btn-success reset-password"  data-id="{{ $user->id }}" data-username="{{ $user->username }}" title="Reset password">
-                                                        <i class="bi bi-arrow-clockwise"></i>
-                                                    </a>
+
+                                                    <button type="button" class="btn btn-sm btn-success reset_password" data-bs-toggle="modal" data-bs-target="#changePasswordModal" data-name="{{ $user->name }}" data-id="{{ $user->id }}" data-username="{{ $user->username }}" title="Change Password">
+                                                        <i class="bi bi-lock"></i>
+                                                    </button>
+
                                                     <button type="button" class="btn btn-sm btn-danger confirm_delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-name="{{ $user->name }}" data-id="{{ $user->id }}" data-username="{{ $user->username }}" title="Delete">
                                                         <i class="bi bi-trash"></i>
                                                     </button>
@@ -197,9 +199,9 @@
                 </div>
                 
                 <form action="#" id="formDelete" method="POST">
+                    @csrf
+                    @method('DELETE')
                     <div class="modal-body">
-                        @csrf
-                        @method('DELETE')
                         <label for="confirm_delete" class="form-label">Anda yakin ingin menghapus pengguna  <span id="deleteName" class="fw-bold text-danger"></span>? </label>
                         <input type="text" class="form-control" name="confirm" id="confirm_delete" required>
                     </div>
@@ -211,11 +213,37 @@
             </div>
         </div>
     </div>
+    
+    <!-- Modal Change Password -->
+    <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h1 class="modal-title fs-5" id="changePasswordModalLabel">Change Password</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="#" id="formChangePassword" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="modal-body">
+                        <div class="mb-1">
+                            Apakah yakin ingin mengubah katasandi <span id="changePasswordUsername" class="fw-bold text-success"></span> - [<span id="changePasswordName" class="fw-bold text-success"></span>]?
+                        </div>
+                        <input type="text" class="form-control" name="password" id="password" placeholder="Masukan katansandi baru" required minlength="8">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-success">Change</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('scripts')
     <script>
-         $('.confirm_delete').click(function(e) {
+        $('.confirm_delete').click(function(e) {
             let name = $(this).data('name');
             let username = $(this).data('username');
             let id = $(this).data('id');
@@ -224,6 +252,17 @@
             $('#deleteName').text(name);
             $('#confirm_delete').attr('placeholder', 'Ketikan: '+ username)
             $('#formDelete').attr('action', route);
+        });
+        
+        $('.reset_password').click(function(e) {
+            let name = $(this).data('name');
+            let username = $(this).data('username');
+            let id = $(this).data('id');
+            let url = "{{ route('user.change.password', ':id') }}";
+            route = url.replace(':id', id);
+            $('#changePasswordName').text(name);
+            $('#changePasswordUsername').text(username);
+            $('#formChangePassword').attr('action', route);
         });
 
 

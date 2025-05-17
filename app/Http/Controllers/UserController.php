@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\Users\TemplateImportUser;
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\Users\ChangePasswordRequest;
 use App\Http\Requests\Users\ImportUserRequest;
 use App\Imports\Users\UserImport;
 use App\Models\Role;
@@ -27,10 +28,11 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
+    
         return view('user.index', [
             'users' => $this->model->paginate(10),
         ]);
-    }
+    } 
 
     public function create(Request $request)
     {
@@ -109,6 +111,14 @@ class UserController extends Controller
         $user->delete();
 
         return to_route('user.index')->with('success', 'Pengguna telah berhasil dihapus');
+    }
+
+    public function changePassword(ChangePasswordRequest $request, $id)
+    {
+        $user = $this->model->findOrFail($id);
+        $user->password = Hash::make($request->password);
+        $user->save();
+        return to_route('user.index')->with('success', 'Katasandi user telah berhasil diubah.');
     }
 
     public function downloadTemplateImport()
