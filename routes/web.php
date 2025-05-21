@@ -26,9 +26,9 @@ Route::middleware('auth')->prefix('dashboard')->group(function () {
         Route::get('/', 'index')->name('user.index');
         Route::get('/add', 'create')->name('user.create');
         Route::post('/add', 'store')->name('user.store');
-        Route::get('/{id}', 'show')->name('user.show');
-        Route::get('/{id}/edit', 'edit')->name('user.edit');
-        Route::patch('/{id}', 'update')->name('user.update');
+        Route::get('/{slug}', 'show')->name('user.show');
+        Route::get('/{slug}/edit', 'edit')->name('user.edit');
+        Route::put('/{id}', 'update')->name('user.update');
         Route::delete('/{id}', 'delete')->name('user.delete');
         Route::put('/{id}/change-password', 'changePassword')->name('user.change.password');
         Route::get('/download/template-import', 'downloadTemplateImport')->name('user.download.template.import');
