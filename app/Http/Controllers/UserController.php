@@ -72,10 +72,10 @@ class UserController extends Controller
         ]);
     }
 
-    public function edit(Request $request)
+    public function edit($slug)
     {
         return view('user.edit', [
-            'user' => $this->model->find($request->param('id')),
+            'user' => $this->model->where('slug', $slug)->firstOrFail(),
         ]);
     }
 
