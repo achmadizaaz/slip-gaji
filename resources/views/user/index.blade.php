@@ -96,7 +96,7 @@
                                             <th>Email</th>
                                             <th>Status</th>
                                             <th>Last login at</th>
-                                            <th class="text-center">Action</th>
+                                            <th>Action</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -125,7 +125,7 @@
                                                     @endif
                                                 </td>
                                                 <td>{!! $user->last_login_at ?? '<i>Belum pernah login</i>' !!}</td>
-                                                <td class="text-center">    
+                                                <td class="d-flex gap-1">    
                                                     <a href="{{ route('user.show', $user->slug) }}" class="btn btn-sm btn-info" data-bs-tooltip title="Detail">
                                                         <i class="bi bi-info-circle"></i>
                                                     </a>                                                   
