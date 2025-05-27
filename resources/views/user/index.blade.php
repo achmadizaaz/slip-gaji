@@ -125,23 +125,25 @@
                                                     @endif
                                                 </td>
                                                 <td>{!! $user->last_login_at ?? '<i>Belum pernah login</i>' !!}</td>
-                                                <td class="d-flex gap-1">    
-                                                    <a href="{{ route('user.show', $user->slug) }}" class="btn btn-sm btn-info" data-bs-tooltip title="Detail">
-                                                        <i class="bi bi-info-circle"></i>
-                                                    </a>                                                   
-                                                    <a href="{{ route('user.edit', $user->slug) }}" class="btn btn-sm btn-warning" data-bs-tooltip title="Edit">
-                                                        <i class="bi bi-pencil-square"></i>
-                                                    </a>
+                                                <td>   
+                                                    <div class="d-flex gap-1">
+                                                        <a href="{{ route('user.show', $user->slug) }}" class="btn btn-sm btn-info" data-bs-tooltip title="Detail">
+                                                            <i class="bi bi-info-circle"></i>
+                                                        </a>   
 
-                                                    <button type="button" class="btn btn-sm btn-success reset_password" data-bs-toggle="modal" data-bs-target="#changePasswordModal" data-name="{{ $user->name }}" data-id="{{ $user->id }}" data-username="{{ $user->username }}" data-bs-tooltip title="Ubah katasandi">
-                                                        <i class="bi bi-lock"></i>
-                                                    </button>
+                                                        <a href="{{ route('user.edit', $user->slug) }}" class="btn btn-sm btn-warning" data-bs-tooltip title="Edit">
+                                                            <i class="bi bi-pencil-square"></i>
+                                                        </a>
 
-                                                    <button type="button" class="btn btn-sm btn-danger confirm_delete" data-bs-toggle="modal" data-bs-target="#deleteModal"  data-name="{{ $user->name }}" data-id="{{ $user->id }}" data-username="{{ $user->username }}" data-bs-tooltip="tooltip" title="Hapus">
-                                                        <i class="bi bi-trash"></i>
-                                                    </button>
+                                                        <button type="button" class="btn btn-sm btn-success reset_password" data-bs-toggle="modal" data-bs-target="#changePasswordModal" data-name="{{ $user->name }}" data-id="{{ $user->id }}" data-username="{{ $user->username }}" data-bs-tooltip title="Ubah katasandi">
+                                                            <i class="bi bi-lock"></i>
+                                                        </button>
 
-                                                    </a>
+                                                        <button type="button" class="btn btn-sm btn-danger confirm_delete" data-bs-toggle="modal" data-bs-target="#deleteModal"  data-name="{{ $user->name }}" data-id="{{ $user->id }}" data-username="{{ $user->username }}" data-bs-tooltip="tooltip" title="Hapus">
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
+
+                                                    </div> <!-- END D-Flex Action -->
                                                 </td>
                                             </tr> 
                                             @endforeach
