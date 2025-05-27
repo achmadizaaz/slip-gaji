@@ -12,7 +12,9 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="page-title-box d-md-flex justify-content-md-between align-items-center">
-                        <h4 class="page-title">Create User</h4>                    
+                        <h4 class="page-title">
+                            Buat Pengguna Baru
+                        </h4>                    
                     </div><!--end page-title-box-->
                 </div><!--end col-->
             </div><!--end row-->
@@ -89,7 +91,7 @@
                                         Status <small class="text-danger">*</small>
                                     </label>
                                     <select name="is_active" id="status" class="form-select @error('is_active') is-invalid @enderror" required>
-                                        <option value="">Choose a status</option>
+                                        <option value="">Pilih salah satu</option>
                                         <option value="inactive" @selected(old('is_active') == 'inactive')>Inactive</option>
                                         <option value="active" @selected(old('is_active') == 'active')>Active</option>
                                     </select>
@@ -102,8 +104,12 @@
                         </div>
                         <hr>
                         <div class="d-flex gap-1">
-                            <button type="submit" class="btn btn-primary">Create a user</button>
-                            <a href="{{ route('user.index') }}" class="btn btn-secondary">Back</a>
+                            <button type="submit" class="btn btn-primary">
+                                Submit
+                            </button>
+                            <a href="{{ route('user.index') }}" class="btn btn-secondary">
+                                Kembali
+                            </a>
                         </div>
                    </div>
                 </form>

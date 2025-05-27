@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="page-title-box d-md-flex justify-content-md-between align-items-center">
-                        <h4 class="page-title">Detail User: {{ $user->name }}</h4>                    
+                        <h4 class="page-title">Detail Pengguna: {{ $user->name }}</h4>                    
                     </div><!--end page-title-box-->
                 </div><!--end col-->
             </div><!--end row-->
@@ -64,7 +64,7 @@
                     <hr>
                     <div class="d-flex gap-1">
                         <a href="{{ route('user.index') }}" class="btn btn-secondary">
-                            <i class="bi bi-arrow-left me-1"></i> Go Back
+                            Kembali
                         </a>
                     </div>
                </div>

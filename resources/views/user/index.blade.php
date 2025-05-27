@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'List Users')
+@section('title', 'Daftar Pengguna')
 
 @section('content')
     <div class="page-wrapper">
@@ -12,15 +12,19 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="page-title-box d-md-flex justify-content-md-between align-items-center">
-                            <h4 class="page-title">List Users</h4>
+                            <h4 class="page-title">Daftar Pengguna</h4>
                             <div class="d-flex gap-1">
+                                {{-- <a href="#" class="btn btn-info" >
+                                    <i class="bi bi-circle me-1"></i> Reset
+                                </a> --}}
+
                                 <!-- Import Button trigger modal -->
                                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#importModal">
                                     <i class="bi bi-cloud-arrow-up me-1"></i> Import
                                 </button>
 
                                 <a href="{{ route('user.create') }}" class="btn btn-primary" >
-                                    <i class="fa-solid fa-plus me-1"></i> Add User
+                                    <i class="fa-solid fa-plus me-1"></i> Buat baru
                                 </a>
                             </div><!--end col-->                             
                         </div><!--end page-title-box-->
@@ -55,7 +59,7 @@
                                     </div> --}}
                                     <table>
                                         <tr>
-                                            <td class="me-2">Show data</td>
+                                            <td class="me-2">Tampilkan </td>
                                             <td>
                                                 <form action="{{ route('session.per-page') }}" method="GET">
                                                     @csrf
@@ -75,6 +79,7 @@
                                                     </select>
                                                 </form>
                                             </td>
+                                            <td> data/halaman</td>
                                         </tr>
                                     </table>
                                 </div>
@@ -91,7 +96,7 @@
                                             <th>Email</th>
                                             <th>Status</th>
                                             <th>Last login at</th>
-                                            <th class="text-end">Action</th>
+                                            <th class="text-center">Action</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -120,7 +125,7 @@
                                                     @endif
                                                 </td>
                                                 <td>{!! $user->last_login_at ?? '<i>Belum pernah login</i>' !!}</td>
-                                                <td class="text-end">    
+                                                <td class="text-center">    
                                                     <a href="{{ route('user.show', $user->slug) }}" class="btn btn-sm btn-info" data-bs-tooltip title="Detail">
                                                         <i class="bi bi-info-circle"></i>
                                                     </a>                                                   
@@ -128,11 +133,11 @@
                                                         <i class="bi bi-pencil-square"></i>
                                                     </a>
 
-                                                    <button type="button" class="btn btn-sm btn-success reset_password" data-bs-toggle="modal" data-bs-target="#changePasswordModal" data-name="{{ $user->name }}" data-id="{{ $user->id }}" data-username="{{ $user->username }}" data-bs-tooltip title="Change Password">
+                                                    <button type="button" class="btn btn-sm btn-success reset_password" data-bs-toggle="modal" data-bs-target="#changePasswordModal" data-name="{{ $user->name }}" data-id="{{ $user->id }}" data-username="{{ $user->username }}" data-bs-tooltip title="Ubah katasandi">
                                                         <i class="bi bi-lock"></i>
                                                     </button>
 
-                                                    <button type="button" class="btn btn-sm btn-danger confirm_delete" data-bs-toggle="modal" data-bs-target="#deleteModal"  data-name="{{ $user->name }}" data-id="{{ $user->id }}" data-username="{{ $user->username }}" data-bs-tooltip="tooltip" title="Delete">
+                                                    <button type="button" class="btn btn-sm btn-danger confirm_delete" data-bs-toggle="modal" data-bs-target="#deleteModal"  data-name="{{ $user->name }}" data-id="{{ $user->id }}" data-username="{{ $user->username }}" data-bs-tooltip="tooltip" title="Hapus">
                                                         <i class="bi bi-trash"></i>
                                                     </button>
 
@@ -192,8 +197,8 @@
             
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-success">Import data</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
         </div>
         </form>
         </div>
@@ -217,8 +222,8 @@
                         <input type="text" class="form-control" name="confirm" id="confirm_delete" required>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                         <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                     </div>
                 </form>
             </div>
@@ -230,7 +235,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                <h1 class="modal-title fs-5" id="changePasswordModalLabel">Change Password</h1>
+                <h1 class="modal-title fs-5" id="changePasswordModalLabel">Ubah Katasandi</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form action="#" id="formChangePassword" method="POST">
@@ -243,8 +248,8 @@
                         <input type="text" class="form-control" name="password" id="password" placeholder="Masukan katansandi baru" required minlength="8">
                     </div>
                     <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Ubah Sandi</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-success">Change</button>
                     </div>
                 </form>
             </div>
