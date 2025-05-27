@@ -76,4 +76,12 @@ class User extends Authenticatable
             ]
         ];
     }
+
+    // SCOPE FILTER
+    public function scopeFilter($query, array $filters){
+        $query->when($filters['search'] ?? false, function($query, $search){
+            return $query->whereAny(['name', 'username', 'email',], 
+                'like', '%' . $search . '%');
+        });
+    }
 }

@@ -13,24 +13,25 @@ use App\Services\FileService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
 use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
-    protected $model, $fileService ;
+    protected $model, $fileService, $perPage;
     
     public function __construct(User $model, FileService $fileService)
     {
         $this->model = $model;
         $this->fileService = $fileService;
+        $this->perPage = Session::get('sessionPerPage');
     }
 
     public function index(Request $request)
     {
-    
         return view('user.index', [
-            'users' => $this->model->paginate(10),
+            'users' => $this->model->filter($request->only(['search']))->paginate($this->perPage ?? 10),
         ]);
     } 
 

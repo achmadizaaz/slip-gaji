@@ -57,12 +57,23 @@
                                         <tr>
                                             <td class="me-2">Show data</td>
                                             <td>
-                                                <select name="per_page" class="form-select" id="per_page" style="width: 100px">
-                                                    <option value="10">10</option>
-                                                    <option value="20">20</option>
-                                                    <option value="50">50</option>
-                                                    <option value="100">100</option>
-                                                </select>
+                                                <form action="{{ route('session.per-page') }}" method="GET">
+                                                    @csrf
+                                                    <select name="per_page" onchange="this.form.submit()" class="form-select form-select-sm" style="width: 100px">
+                                                        <option value="10" @if (session('sessionPerPage') == 10)
+                                                            selected
+                                                        @endif>10</option>
+                                                        <option value="25" @if (session('sessionPerPage') == 25)
+                                                        selected
+                                                        @endif>25</option>
+                                                        <option value="50" @if (session('sessionPerPage') == 50)
+                                                        selected
+                                                        @endif>50</option>
+                                                        <option value="100" @if (session('sessionPerPage') == 100)
+                                                        selected
+                                                        @endif>100</option>
+                                                    </select>
+                                                </form>
                                             </td>
                                         </tr>
                                     </table>

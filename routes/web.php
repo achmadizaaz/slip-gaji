@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SessionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,8 @@ Route::middleware('auth')->group(function () {
 
 
 Route::middleware('auth')->prefix('dashboard')->group(function () {
+    Route::get('session/per-page', SessionController::class)->name('session.per-page');
+
     // ROUTE USERS
     Route::controller(UserController::class)->prefix('users')->group(function(){
         Route::get('/', 'index')->name('user.index');
