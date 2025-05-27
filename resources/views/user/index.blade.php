@@ -110,18 +110,18 @@
                                                 </td>
                                                 <td>{!! $user->last_login_at ?? '<i>Belum pernah login</i>' !!}</td>
                                                 <td class="text-end">    
-                                                    <a href="{{ route('user.show', $user->slug) }}" class="btn btn-sm btn-info" title="Detail">
+                                                    <a href="{{ route('user.show', $user->slug) }}" class="btn btn-sm btn-info" data-bs-tooltip title="Detail">
                                                         <i class="bi bi-info-circle"></i>
                                                     </a>                                                   
-                                                    <a href="{{ route('user.edit', $user->slug) }}" class="btn btn-sm btn-warning" title="Edit">
+                                                    <a href="{{ route('user.edit', $user->slug) }}" class="btn btn-sm btn-warning" data-bs-tooltip title="Edit">
                                                         <i class="bi bi-pencil-square"></i>
                                                     </a>
 
-                                                    <button type="button" class="btn btn-sm btn-success reset_password" data-bs-toggle="modal" data-bs-target="#changePasswordModal" data-name="{{ $user->name }}" data-id="{{ $user->id }}" data-username="{{ $user->username }}" title="Change Password">
+                                                    <button type="button" class="btn btn-sm btn-success reset_password" data-bs-toggle="modal" data-bs-target="#changePasswordModal" data-name="{{ $user->name }}" data-id="{{ $user->id }}" data-username="{{ $user->username }}" data-bs-tooltip title="Change Password">
                                                         <i class="bi bi-lock"></i>
                                                     </button>
 
-                                                    <button type="button" class="btn btn-sm btn-danger confirm_delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-name="{{ $user->name }}" data-id="{{ $user->id }}" data-username="{{ $user->username }}" title="Delete">
+                                                    <button type="button" class="btn btn-sm btn-danger confirm_delete" data-bs-toggle="modal" data-bs-target="#deleteModal"  data-name="{{ $user->name }}" data-id="{{ $user->id }}" data-username="{{ $user->username }}" data-bs-tooltip="tooltip" title="Delete">
                                                         <i class="bi bi-trash"></i>
                                                     </button>
 

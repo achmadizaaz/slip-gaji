@@ -9,7 +9,7 @@
         <!-- App favicon -->
         <link rel="shortcut icon" href="{{ asset('themes/images/logo-laravel.webp') }}">
         <!-- Scripts -->
-        @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+        @vite(['resources/sass/app.scss'])
 
         <!-- App css -->
         <link href="{{ asset('themes/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
@@ -36,8 +36,8 @@
         @stack('scripts')
         <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
         <script>
-            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-            const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+            const tooltipTriggerList = document.querySelectorAll('[data-bs-tooltip]')
+            const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
         </script>
 
     </body>
