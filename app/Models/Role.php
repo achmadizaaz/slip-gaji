@@ -12,4 +12,12 @@ class Role extends SpatieRole
         'level',
         'description'
     ];
+
+    // SCOPE FILTER
+    public function scopeFilter($query, array $filters){
+        $query->when($filters['search'] ?? false, function($query, $search){
+            return $query->whereAny(['name', 'level', 'description',], 
+                'like', '%' . $search . '%');
+        });
+    }
 }

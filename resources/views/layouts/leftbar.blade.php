@@ -44,7 +44,7 @@
                                     <a href="{{ route('user.index') }}" class="nav-link ">List Pengguna</a>
                                 </li><!--end nav-item-->
                                 <li class="nav-item">
-                                    <a href="analytics-reports.html" class="nav-link ">Roles</a>
+                                    <a href="{{ route('role.index') }}" class="nav-link ">Roles</a>
                                 </li><!--end nav-item-->
                                 <li class="nav-item">
                                     <a href="analytics-reports.html" class="nav-link ">Hak Akses</a>
