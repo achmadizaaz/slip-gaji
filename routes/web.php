@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SessionController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\User\RoleController;
+use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -36,6 +37,15 @@ Route::middleware('auth')->prefix('dashboard')->group(function () {
         Route::put('/{id}/change-password', 'changePassword')->name('user.change.password');
         Route::get('/download/template-import', 'downloadTemplateImport')->name('user.download.template.import');
         Route::put('/import', 'importUsers')->name('user.import');
+    });
+
+    // Route Roles
+    Route::controller(RoleController::class)->prefix('roles')->group(function (){
+        Route::get('/', 'index')->name('role.index');
+        Route::post('/', 'store')->name('role.store');
+        Route::get('/{id}', 'getRoleJsonById')->name('role.show');
+        Route::put('/{id}/update', 'update')->name('role.update');
+        Route::delete('/{id}/delete', 'destroy')->name('role.delete');
     });
 
 

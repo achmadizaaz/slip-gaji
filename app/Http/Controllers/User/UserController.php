@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
 use App\Exports\Users\TemplateImportUser;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\Users\ChangePasswordRequest;
 use App\Http\Requests\Users\ImportUserRequest;
