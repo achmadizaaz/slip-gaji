@@ -25,8 +25,9 @@ class RoleController extends Controller
     public function store(RoleRequest $request)
     {
         $this->model->create([
+            'code' => $request->code,
             'name' => $request->name,
-            'level' => $request->level,
+            'is_admin' => $request->is_admin,
             'description' => $request->description
         ]);
 

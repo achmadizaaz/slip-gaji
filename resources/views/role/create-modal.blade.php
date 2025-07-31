@@ -16,12 +16,18 @@
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">
+                        <label for="code" class="form-label">
+                            Code Role <span class="fst-italic text-danger">*</span>
+                        </label>
+                        <input type="text" name="code" class="form-control" required placeholder="Masukan kode role">
+                    </div>
+                    <div class="mb-3">
                         <label for="name" class="form-label">
                             Name Role <span class="fst-italic text-danger">*</span>
                         </label>
                         <input type="text" name="name" class="form-control" required placeholder="Masukan nama role">
                     </div>
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label for="level" class="form-label">
                             Level <span class="fst-italic text-danger">*</span>
                         </label>
@@ -30,6 +36,16 @@
                             @for ($i = 1; $i < 11; $i++)
                             <option value="{{ $i }}"> {{ $i }} </option>
                             @endfor
+                        </select>
+                    </div> --}}
+                    <div class="mb-3">
+                        <label for="is_admin" class="form-label">
+                            Level Admin <span class="fst-italic text-danger">*</span>
+                        </label>
+                        <select name="is_admin" id="is_admin" class="form-select" required>
+                            <option value="">Choose a option</option>
+                            <option value="non-admin">Non Admin</option>
+                            <option value="admin">Admin</option>
                         </select>
                     </div>
                     <div class="mb-3">

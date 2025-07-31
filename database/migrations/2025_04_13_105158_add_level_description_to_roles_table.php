@@ -12,8 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('roles', function (Blueprint $table) {
-            $table->integer('level')->after('name')->default(1);
-            $table->string('description')->after('level')->nullable();
+            $table->string('code')->after('id')->unique();
+            $table->enum('is_admin', ["admin","non-admin"])->after('name')->default('non-admin');
+            $table->string('description')->after('is_admin')->nullable();
         });
     }
 

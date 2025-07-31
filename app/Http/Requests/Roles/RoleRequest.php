@@ -22,8 +22,9 @@ class RoleRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'code' => 'min:3|required|string|unique:roles,code,except,id',
             'name' => 'required|string|unique:roles,name,except,id',
-            'level' => 'required|numeric|min:1|max:10',
+            'is_admin' => 'required|in:admin,non-admin',
             'description' => 'nullable|string|max:250'
         ];
     }

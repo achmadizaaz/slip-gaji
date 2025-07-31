@@ -83,8 +83,9 @@
                                             <th style="width: 16px;">
                                                 #
                                             </th>
-                                            <th class="ps-0">Name</th>
-                                            <th>Level</th>
+                                            <th>Code</th>
+                                            <th>Name</th>
+                                            <th>Level Admin</th>
                                             <th>Description</th>
                                             <th>Action</th>
                                         </tr>
@@ -95,8 +96,9 @@
                                                 <td style="width: 16px;">
                                                     {{ ($roles->currentPage() - 1) * $roles->perPage() + $loop->iteration }}
                                                 </td>
+                                                <td>{{ $role->code }}</td>
                                                 <td>{{ $role->name }}</td>
-                                                <td>{{ $role->level }} </td>
+                                                <td>{{ $role->is_admin }} </td>
                                                 <td>{{ $role->description ?? '-' }} </td>
                                                 <td>   
                                                     <div class="d-flex gap-1">
