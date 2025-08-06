@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Roles\ConfirmDeleteRoleRequest;
 use App\Http\Requests\Roles\RoleRequest;
 use App\Models\Role;
 use Illuminate\Http\Request;
@@ -44,14 +45,14 @@ class RoleController extends Controller
         $role = $this->model->findOrFail($id);
         $role->update([
             'name' => $request->name,
-            'level' => $request->level,
+            'is_admin' => $request->is_admin,
             'description' => $request->description
         ]);
 
         return back()->with('success', 'Role telah berhasil diperbarui!');
     }
 
-    public function destroy($id)
+    public function destroy(ConfirmDeleteRoleRequest $request, $id)
     {
         $role = $this->model->findOrFail($id);
         $role->delete();

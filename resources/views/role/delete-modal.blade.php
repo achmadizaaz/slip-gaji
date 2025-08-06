@@ -18,6 +18,9 @@
                 <div class="modal-body">
                     <label for="confirm_delete" class="form-label">Anda yakin ingin role    <span id="deleteName" class="fw-bold text-danger"></span>? </label>
                     <input type="text" class="form-control" name="confirm" id="confirm_delete" required>
+                    <small class="mt-2 fst-italic text-dark">
+                        Untuk melanjutkan penghapusan data role silakan ketik "<b>DELETE</b>" tanpa tanda petik.
+                    </small>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-danger">Delete</button>
@@ -35,7 +38,7 @@
         let url = "{{ route('role.delete', ':id') }}";
         route = url.replace(':id', id);
         $('#deleteName').text(name);
-        $('#confirm_delete').attr('placeholder', 'Ketikan: '+ name)
+        $('#confirm_delete').attr('placeholder', 'Ketik "DELETE" untuk konfirmasi')
         $('#formDelete').attr('action', route);
     });
 </script>

@@ -98,7 +98,17 @@
                                                 </td>
                                                 <td>{{ $role->code }}</td>
                                                 <td>{{ $role->name }}</td>
-                                                <td>{{ $role->is_admin }} </td>
+                                                <td>
+                                                    @if ($role->is_admin == 'admin')
+                                                        <span class="badge text-bg-success">
+                                                            {{ $role->is_admin }}
+                                                        </span>
+                                                    @else
+                                                        <span class="badge text-bg-secondary">
+                                                            {{ $role->is_admin }}
+                                                        </span>
+                                                    @endif
+                                                </td>
                                                 <td>{{ $role->description ?? '-' }} </td>
                                                 <td>   
                                                     <div class="d-flex gap-1">

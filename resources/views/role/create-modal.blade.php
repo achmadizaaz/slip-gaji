@@ -16,10 +16,10 @@
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="code" class="form-label">
+                        <label for="confirm_code" class="form-label">
                             Code Role <span class="fst-italic text-danger">*</span>
                         </label>
-                        <input type="text" name="code" class="form-control" required placeholder="Masukan kode role">
+                        <input type="text" name="code" class="form-control" required placeholder="Masukan kode role" id="confirm_code" oninput="this.value = this.value.replace(/\s/g, '')" maxlength="10">
                     </div>
                     <div class="mb-3">
                         <label for="name" class="form-label">

@@ -4,7 +4,7 @@ namespace App\Http\Requests\Roles;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RoleRequest extends FormRequest
+class ConfirmDeleteRoleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,14 @@ class RoleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'code' => 'min:3|max:10|required|string|unique:roles,code,except,id|regex:/^\S+$/',
-            'name' => 'required|string|unique:roles,name,except,id',
-            'is_admin' => 'required|in:admin,non-admin',
-            'description' => 'nullable|string|max:250'
+            'confirm' => ['required', 'in:DELETE'],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'confirm.in' => 'Type "DELETE" to confirm data deletion.',
         ];
     }
 }
