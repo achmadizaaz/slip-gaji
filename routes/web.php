@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\User\RoleController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -49,6 +50,13 @@ Route::middleware('auth')->prefix('dashboard')->group(function () {
     });
 
 
+    // Route Employees
+    Route::controller(EmployeeController::class)->prefix('employees')->group(function(){
+        Route::get('/', 'index')->name('employee.index');
+        Route::post('/', 'store')->name('employee.store');
+        Route::put('/{id}/update', 'update')->name('employee.update');
+        Route::delete('/{id}/delete', 'destroy')->name('employee.delete');
+    });
 });
 
 
