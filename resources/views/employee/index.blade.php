@@ -101,7 +101,7 @@
                                                 <td>{{ $employee->email }}</td>
                                                 <td>{{ $employee->status_kepegawaian }}</td>
                                                 
-                                                <td>{{ $employee->gaji_pokok }} </td>
+                                                <td>@rupiah($employee->gaji_pokok)</td>
                                                 <td>   
                                                     <div class="d-flex gap-1">
                                                         Ok
