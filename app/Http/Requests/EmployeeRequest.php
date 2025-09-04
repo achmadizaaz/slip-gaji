@@ -22,11 +22,12 @@ class EmployeeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nis' => 'nullable|unique:employees,nis',
+            'nip' => 'nullable|unique:employees,nip',
             'nama' => 'string|required',
             'status_kepegawaian' => 'in:Tetap,Kontrak,Honorer',
             'email' => 'email|required|unique:employees,email',
-            'gaji_pokok' => 'required'
+            'gaji_pokok' => 'required',
+            'is_active' => 'required|boolean'
         ];
     }
 }

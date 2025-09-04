@@ -55,7 +55,7 @@ Route::middleware('auth')->prefix('dashboard')->group(function () {
         Route::get('/', 'index')->name('employee.index');
         Route::post('/', 'store')->name('employee.store');
         Route::put('/{id}/update', 'update')->name('employee.update');
-        Route::delete('/{id}/delete', 'destroy')->name('employee.delete');
+        Route::delete('/{slug}/delete', 'destroy')->name('employee.delete');
     });
 });
 

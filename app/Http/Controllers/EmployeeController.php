@@ -28,13 +28,21 @@ class EmployeeController extends Controller
         $amount = preg_replace('/\D/', '', $request->input('gaji_pokok'));
 
         $this->model->create([
-            'nis' => $request->nis,
+            'nip' => $request->nip,
             'nama' => $request->nama,
             'email' => $request->email,
             'status_kepegawaian' => $request->status_kepegawaian,
-            'gaji_pokok' => $amount
+            'gaji_pokok' => $amount,
+            'is_active' => $request->is_active,
         ]);
 
         return back()->with('success', 'Data Pengawai Berhasil Dibuat!');
+    }
+
+    public function destroy($slug)
+    {
+        $employee = $this->model->where('slug', $slug)->firstOrFail();
+
+        dd($employee);
     }
 }

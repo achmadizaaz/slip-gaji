@@ -15,11 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('nip')->unique()->nullable();   // Nomor Induk Pegawai
             $table->string('nama');
+            $table->string('slug')->unique();
             $table->string('email')->unique()->nullable();
             $table->enum('status_kepegawaian', ['Tetap', 'Kontrak', 'Honorer'])->default('Tetap');
             $table->decimal('gaji_pokok', 15, 2)->default(0); // default gaji pokok bisa diset di sini
-
+            $table->boolean('is_active')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

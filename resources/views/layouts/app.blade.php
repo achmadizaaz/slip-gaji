@@ -20,7 +20,7 @@
 
     
     <!-- Top Bar Start -->
-    <body>
+    <body data-sidebar-size="default">
         @include('layouts.topbar')
 
         @include('layouts.leftbar')

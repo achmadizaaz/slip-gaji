@@ -28,6 +28,13 @@
                         </a>
                     </li><!--end nav-item-->
 
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('employee.index') }}">
+                            <i class="iconoir-community menu-icon"></i>
+                            <span>Pengawai</span>
+                        </a>
+                    </li>
+
                     <li class="menu-label mt-2">
                         <span>User Management</span>
                     </li>

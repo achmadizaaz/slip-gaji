@@ -3,20 +3,37 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Employee extends Model
 {
+
+    use Sluggable;
+
    protected $fillable = [
         'nip',
         'nama',
-        'jabatan',
-        'unit_kerja',
+        'slug',
         'email',
-        'no_hp',
         'tanggal_masuk',
         'status_kepegawaian',
         'gaji_pokok',
+        'is_active',
     ];
+
+     /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'nama'
+            ]
+        ];
+    }
 
     public function allowances()
     {

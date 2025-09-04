@@ -82,7 +82,7 @@
                                             <th style="width: 16px;">
                                                 #
                                             </th>
-                                            <th>NIS</th>
+                                            <th>NIP</th>
                                             <th>Nama</th>
                                             <th>Email</th>
                                             <th>Status</th>
@@ -96,17 +96,16 @@
                                                 <td style="width: 16px;">
                                                     {{ ($employees->currentPage() - 1) * $employees->perPage() + $loop->iteration }}
                                                 </td>
-                                                <td>{{ $employee->nis }}</td>
+                                                <td>{{ $employee->nip }}</td>
                                                 <td>{{ $employee->nama }}</td>
                                                 <td>{{ $employee->email }}</td>
                                                 <td>{{ $employee->status_kepegawaian }}</td>
                                                 
                                                 <td>@rupiah($employee->gaji_pokok)</td>
                                                 <td>   
-                                                    <div class="d-flex gap-1">
-                                                        Ok
-                                                        {{-- @include('employee.edit-modal')
-                                                        @include('employee.delete-modal') --}}
+                                                     <div class="d-flex gap-1">
+                                                        {{-- @include('role.edit-modal') --}}
+                                                        @include('employee.delete-modal')
                                                     </div> <!-- END D-Flex Action -->
                                                 </td>
                                             </tr> 
