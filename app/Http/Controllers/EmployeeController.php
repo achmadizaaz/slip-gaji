@@ -39,10 +39,30 @@ class EmployeeController extends Controller
         return back()->with('success', 'Data Pengawai Berhasil Dibuat!');
     }
 
+
+    public function update($slug, EmployeeRequest $request)
+    {
+        $amount = preg_replace('/\D/', '', $request->input('gaji_pokok'));
+
+
+        $this->model->where('slug', $slug)->update([
+            'nip' => $request->nip,
+            'nama' => $request->nama,
+            'email' => $request->email,
+            'status_kepegawaian' => $request->status_kepegawaian,
+            'gaji_pokok' => $amount,
+            'is_active' => $request->is_active,
+        ]);
+
+        return back()->with('success', 'Data Pengawai Berhasil Diperbarui!');
+    }
+
     public function destroy($slug)
     {
         $employee = $this->model->where('slug', $slug)->firstOrFail();
 
-        dd($employee);
+        $employee->delete();
+
+        return back()->with('success', 'Data Pengawai Berhasil Dihapus!');
     }
 }

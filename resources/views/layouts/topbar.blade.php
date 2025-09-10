@@ -1,33 +1,33 @@
 <!-- Top Bar Start -->
 <div class="topbar d-print-none">
     <div class="container-fluid">
-        <nav class="topbar-custom d-flex justify-content-between" id="topbar-custom">    
+        <nav class="topbar-custom d-flex justify-content-between" id="topbar-custom">
 
 
-            <ul class="topbar-item list-unstyled d-inline-flex align-items-center mb-0">                        
+            <ul class="topbar-item list-unstyled d-inline-flex align-items-center mb-0">
                 <li>
                     <button class="nav-link mobile-menu-btn nav-icon" id="togglemenu">
                         <i class="iconoir-menu"></i>
                     </button>
-                </li> 
+                </li>
                 <li class="mx-2 welcome-text">
                     <h5 class="mb-0 fw-semibold text-truncate">Hi, {{ Auth::user()->name }}</h5>
                     <h6 class="mb-0 fw-normal text-muted text-truncate small">Selamat datang, kembali.</h6>
-                </li>                   
+                </li>
             </ul>
             <ul class="topbar-item list-unstyled d-inline-flex align-items-center mb-0">
-                <li class="hide-phone app-search">
+                {{-- <li class="hide-phone app-search">
                     <form role="search" action="#" method="get">
                         <input type="search" name="search" class="form-control top-search mb-0" placeholder="Search here..." value="{{ old('search', request()->input('search')) }}">
-                        <button type="submit"><i class="iconoir-search"></i></button>
+                        <button type="button"><i class="iconoir-search"></i></button>
                     </form>
-                </li>     
+                </li> --}}
 
                 <li class="topbar-item">
                     <a class="nav-link nav-icon" href="javascript:void(0);" id="light-dark-mode">
                         <i class="iconoir-half-moon dark-mode"></i>
                         <i class="iconoir-sun-light light-mode"></i>
-                    </a>                    
+                    </a>
                 </li>
 
                 <li class="dropdown topbar-item">
@@ -37,7 +37,7 @@
                         <span class="alert-badge"></span>
                     </a>
                     <div class="dropdown-menu stop dropdown-menu-end dropdown-lg py-0">
-                
+
                         <h5 class="dropdown-item-text m-0 py-3 d-flex justify-content-between align-items-center">
                             Notifications <a href="#" class="badge text-body-tertiary badge-pill">
                                 <i class="iconoir-plus-circle fs-4"></i>
@@ -93,7 +93,7 @@
                                     <a href="#" class="dropdown-item py-3">
                                         <small class="float-end text-muted ps-2">40 min ago</small>
                                         <div class="d-flex align-items-center">
-                                            <div class="flex-shrink-0 bg-primary-subtle text-primary thumb-md rounded-circle">                                                    
+                                            <div class="flex-shrink-0 bg-primary-subtle text-primary thumb-md rounded-circle">
                                                 <i class="iconoir-birthday-cake fs-4"></i>
                                             </div>
                                             <div class="flex-grow-1 ms-2 text-truncate">
@@ -134,7 +134,7 @@
                                     <a href="#" class="dropdown-item py-3">
                                         <small class="float-end text-muted ps-2">40 min ago</small>
                                         <div class="d-flex align-items-center">
-                                            <div class="flex-shrink-0 bg-primary-subtle text-primary thumb-md rounded-circle">                                                    
+                                            <div class="flex-shrink-0 bg-primary-subtle text-primary thumb-md rounded-circle">
                                                 <i class="iconoir-birthday-cake fs-4"></i>
                                             </div>
                                             <div class="flex-grow-1 ms-2 text-truncate">
@@ -199,7 +199,7 @@
                                     </a><!--end-item-->
                                 </div>
                             </div>
-                    
+
                         </div>
                         <!-- All-->
                         <a href="pages-notifications.html" class="dropdown-item text-center text-dark fs-13 py-2">
@@ -227,10 +227,10 @@
                         <small class="text-muted px-2 pb-1 d-block">Account</small>
                         <a class="dropdown-item" href="pages-profile.html"><i class="las la-user fs-18 me-1 align-text-bottom"></i> Profile</a>
                         <a class="dropdown-item" href="pages-faq.html"><i class="las la-wallet fs-18 me-1 align-text-bottom"></i> Earning</a>
-                        <small class="text-muted px-2 py-1 d-block">Settings</small>                        
+                        <small class="text-muted px-2 py-1 d-block">Settings</small>
                         <a class="dropdown-item" href="pages-profile.html"><i class="las la-cog fs-18 me-1 align-text-bottom"></i>Account Settings</a>
                         <a class="dropdown-item" href="pages-profile.html"><i class="las la-lock fs-18 me-1 align-text-bottom"></i> Security</a>
-                        <a class="dropdown-item" href="pages-faq.html"><i class="las la-question-circle fs-18 me-1 align-text-bottom"></i> Help Center</a>                       
+                        <a class="dropdown-item" href="pages-faq.html"><i class="las la-question-circle fs-18 me-1 align-text-bottom"></i> Help Center</a>
                         {{-- Form Log out --}}
                         <div class="dropdown-divider mb-0"></div>
                         <form method="POST" action="{{ route('logout') }}" >

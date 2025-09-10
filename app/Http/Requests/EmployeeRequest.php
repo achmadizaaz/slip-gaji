@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class EmployeeRequest extends FormRequest
 {
@@ -22,10 +23,10 @@ class EmployeeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nip' => 'nullable|unique:employees,nip',
+            'nip' => ['required', Rule::unique('employees', 'nip')->ignore($this->id, 'slug'),],
             'nama' => 'string|required',
             'status_kepegawaian' => 'in:Tetap,Kontrak,Honorer',
-            'email' => 'email|required|unique:employees,email',
+            'email' =>  ['required', 'email',Rule::unique('employees', 'email')->ignore($this->id, 'slug'),],
             'gaji_pokok' => 'required',
             'is_active' => 'required|boolean'
         ];

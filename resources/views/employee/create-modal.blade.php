@@ -14,7 +14,7 @@
       <form action="{{ route('employee.store') }}" method="POST">
         <div class="modal-body">
             @csrf
-            
+
             <div class="row">
               <div class="col mb-3">
                   <label for="nip" class="form-label">NIP</label>
@@ -53,19 +53,19 @@
                     </select>
                 </div>
               </div>
-              
+
             </div>
 
-            
+
             <div class="mb-3">
               <label for="gaji_pokok" class="form-label">Gaji Pokok</label>
               <div class="input-group mb-3">
                   <span class="input-group-text">Rp</span>
-                  <input type="text" class="form-control" id="rupiah" name="gaji_pokok" placeholder="2.XXX.XXX" >
+                  <input type="text" class="form-control rupiah"  name="gaji_pokok" placeholder="2.XXX.XXX" >
                   <span class="input-group-text">.00</span>
               </div>
           </div>
-            
+
 
         </div>
         <div class="modal-footer">
@@ -76,19 +76,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  const rupiahInput = document.getElementById('rupiah');
-
-  rupiahInput.addEventListener('input', function (e) {
-    let value = this.value.replace(/\D/g, ""); // hanya angka
-    value = new Intl.NumberFormat('id-ID').format(value); // format dengan titik
-    this.value = value;
-  });
-
-  // biar saat pertama kali submit tidak kirim format "1.000.000"
-  // form.addEventListener('submit', function () {
-  //   let raw = rupiahInput.value.replace(/\D/g, "");
-  //   amountInput.value = raw;
-  // });
-</script>

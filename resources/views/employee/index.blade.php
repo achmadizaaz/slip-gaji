@@ -54,7 +54,7 @@
                                             <td>
                                                 <form action="{{ route('session.per-page') }}" method="GET">
                                                     @csrf
-                                                    <select name="per_page" onchange="this.form.submit()" class="form-select form-select-sm" style="width: 100px">
+                                                    <select name="per_page" onchange="this.form.submit()" class="form-select form-select-sm nofake" style="width: 100px">
                                                         <option value="10" @if (session('sessionPerPage') == 10)
                                                             selected
                                                         @endif>10</option>
@@ -85,7 +85,8 @@
                                             <th>NIP</th>
                                             <th>Nama</th>
                                             <th>Email</th>
-                                            <th>Status</th>
+                                            {{-- <th>Status</th> --}}
+                                            <th>Aktif?</th>
                                             <th>Gaji Pokok</th>
                                             <th>Action</th>
                                         </tr>
@@ -99,16 +100,33 @@
                                                 <td>{{ $employee->nip }}</td>
                                                 <td>{{ $employee->nama }}</td>
                                                 <td>{{ $employee->email }}</td>
-                                                <td>{{ $employee->status_kepegawaian }}</td>
-                                                
+
+                                                {{-- <td>{{ $employee->status_kepegawaian }}</td> --}}
+                                                <td>
+                                                    @if ($employee->is_active)
+                                                        <span class="badge text-bg-success">Aktif</span>
+                                                        @else
+                                                         <span class="badge text-bg-danger">Tidak aktif</span>
+                                                    @endif
+                                                </td>
+
                                                 <td>@rupiah($employee->gaji_pokok)</td>
-                                                <td>   
+                                                <td>
                                                      <div class="d-flex gap-1">
-                                                        {{-- @include('role.edit-modal') --}}
-                                                        @include('employee.delete-modal')
+
+                                                        <!-- Button Edit -->
+                                                        <button type="button" class="btn btn-sm btn-warning edit" data-bs-toggle="modal" data-bs-target="#editModal" data-name="{{ $employee->nama }}" data-nip="{{ $employee->nip }}"  data-email="{{ $employee->email }}" data-is_active="{{ $employee->is_active }}"  data-kepegawaian="{{ $employee->status_kepegawaian }}"  data-gaji="{{ $employee->gaji_pokok }}"  data-slug="{{ $employee->slug }}" data-bs-tooltip title="Edit">
+                                                            <i class="bi bi-pencil-square"></i>
+                                                        </button>
+
+                                                        {{-- Button Delete --}}
+                                                        <button type="button" class="btn btn-sm btn-danger confirm_delete" data-bs-toggle="modal" data-bs-target="#deleteModal"  data-name="{{ $employee->nama }}" data-slug="{{ $employee->slug }}" data-bs-tooltip="tooltip" title="Remove">
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
+
                                                     </div> <!-- END D-Flex Action -->
                                                 </td>
-                                            </tr> 
+                                            </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
@@ -127,4 +145,29 @@
         <!-- end page content -->
     </div>
     <!-- end page-wrapper -->
+
+    @include('employee.edit-modal')
+    @include('employee.delete-modal')
+
 @endsection
+
+@push('scripts')
+    <script>
+        const rupiahInputs = document.getElementsByClassName('rupiah');
+
+        Array.from(rupiahInputs).forEach(function(input) {
+            input.addEventListener('input', function () {
+                let value = this.value.replace(/\D/g, ""); // hanya angka
+                if (value) {
+                    this.value = new Intl.NumberFormat('id-ID', {
+                        style: 'decimal',
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0
+                    }).format(value);
+                } else {
+                    this.value = "";
+                }
+            });
+        });
+    </script>
+@endpush
