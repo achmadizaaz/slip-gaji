@@ -13,7 +13,7 @@
         </a>
     </div>
     <!--end brand-->
-    
+
     <!--start startbar-menu-->
     <div class="startbar-menu" >
         <div class="startbar-collapse" id="startbarCollapse" data-simplebar>
@@ -35,14 +35,21 @@
                         </a>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('allowance.index') }}">
+                            <i class="iconoir-community menu-icon"></i>
+                            <span>Tunjangan</span>
+                        </a>
+                    </li>
+
                     <li class="menu-label mt-2">
                         <span>User Management</span>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link" href="#sidebarAnalytics" data-bs-toggle="collapse" role="button"
-                            aria-expanded="false" aria-controls="sidebarAnalytics"> 
-                            <i class="iconoir-community menu-icon"></i>                                     
+                            aria-expanded="false" aria-controls="sidebarAnalytics">
+                            <i class="iconoir-community menu-icon"></i>
                             <span>Pengguna</span>
                         </a>
                         <div class="collapse " id="sidebarAnalytics">
@@ -58,7 +65,7 @@
                                 </li><!--end nav-item-->
                             </ul><!--end nav-->
                         </div>
-                    </li><!--end nav-item-->   
+                    </li><!--end nav-item-->
 
                     <li class="menu-label mt-2">
                         <span>Settings</span>
@@ -69,11 +76,11 @@
                             <span>Pengaturan</span>
                         </a>
                     </li><!--end nav-item-->
-                    
+
                 </ul><!--end navbar-nav--->
             </div>
         </div><!--end startbar-collapse-->
-    </div><!--end startbar-menu-->    
+    </div><!--end startbar-menu-->
 </div><!--end startbar-->
 <div class="startbar-overlay d-print-none"></div>
 <!-- end leftbar-tab-menu-->

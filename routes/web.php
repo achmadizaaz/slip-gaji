@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AllowanceController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\User\RoleController;
@@ -57,7 +58,16 @@ Route::middleware('auth')->prefix('dashboard')->group(function () {
         Route::put('/{id}/update', 'update')->name('employee.update');
         Route::delete('/{slug}/delete', 'destroy')->name('employee.delete');
     });
+
+    // Route Allowances
+    Route::controller(AllowanceController::class)->prefix('allowances')->group(function(){
+        Route::get('/', 'index')->name('allowance.index');
+        Route::post('/', 'store')->name('allowance.store');
+        Route::put('/{id}/update', 'update')->name('allowance.update');
+        Route::delete('/{slug}/delete', 'destroy')->name('allowance.delete');
+    });
 });
+
 
 
 require __DIR__.'/auth.php';
